@@ -1,16 +1,33 @@
-Notes
-- Even though SurfStitch is a .Net house, I have chosen to do this project in Java because my home machine is a MacBook
-Pro, and all my home projects I do in Java, so I have it set up for that. It would take too much time to set up a
-VMWare with Windows and dev environment for this task. The task instructions said to use any language I like, so I have
-stuck with Java.
+This project was the solution for a job interview test as follows:
 
+1. Solution Implementation
+
+You have 1 database table named Product with the following columns: 
+• ProductID
+• ProductName
+• ProductDescription
+
+New products are created via messages consumed off a message broker. Please provide a solution in the language/tech stack of your choice that consumes a message from a queue & saves this message to the Product database table. The message body will be in JSON format & have the same 3 properties as the database columns shown above. The queue is expected to fill up extremely fast, so sequential processing of messages from the queue is not feasible. Please provide evidence of testing, error handling & logging. Finally, describe in your own words how you would deploy this application.
+
+Deliver the solution for review in a way you see fit.
+
+Please note:
+• You are NOT expected to configure an actual message broker - you can mock and/or stub the
+code that would interact with the queue if you deem it necessary
+• You are NOT expected to configure a SQL database, again, you can mock and/or stub the code
+that would interact with the database if you deem it necessary
+• You should spend no longer than a few hours on this - if you take longer than 6-8 hours you are
+doing too much
+
+
+My Notes
 - In a real software task, as I delve into the problem, any questions I have, I would normally go to the stakeholder(s)
 for clarification. However, due to the nature of this task, I will make assumptions instead, and treat those
 assumptions as the answers as if I had asked the stakeholders. The following are such assumptions:
   - I will assume the ProductID is to be the primary key of the Product table.
   - The message body contains the 3 values of the Product table columns, including the ProductID, and thus the primary
   key. So if there are messages sent with duplicate ProductID values, then there is a conflict in the primary key
-  constraint. So I will assume that when a duplicate occurs, the last message to be received, is NOT to be added to the
+  constraint. So I will assume that when a duplicate occurs, the last message received, is NOT to be added to the
   DB. Instead the details are to be logged. There are many other ways to deal with this, but this is the way I will go
   for the purpose of this exercise.
     Due to this assumption, and due to the multiple threads writing to the DB, there can be a problem where multiple
